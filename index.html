@@ -1,0 +1,1719 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alvaro Montalvan | Ingeniería de Software - Portafolio Profesional</title>
+    <meta name="description" content="Portafolio profesional de Alvaro Montalvan, estudiante de Ingeniería de Software en la Escuela Politécnica Nacional (EPN).">
+    
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* ==========================================
+           VARIABLES DE DISEÑO (Paleta Corporativa & Tech)
+           ========================================== */
+        :root {
+            --bg-primary: #F8FAFC;
+            --bg-secondary: #FFFFFF;
+            --bg-tertiary: #F1F5F9;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #64748B;
+            --accent-primary: #2563EB;
+            --accent-hover: #1D4ED8;
+            --accent-light: #EFF6FF;
+            --accent-secondary: #0EA5E9;
+            --border-color: #E2E8F0;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+            --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.06);
+            --shadow-lg: 0 10px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.05);
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0B1120;
+            --bg-secondary: #1E293B;
+            --bg-tertiary: #0F172A;
+            --text-primary: #F8FAFC;
+            --text-secondary: #CBD5E1;
+            --text-muted: #94A3B8;
+            --accent-primary: #3B82F6;
+            --accent-hover: #60A5FA;
+            --accent-light: rgba(59, 130, 246, 0.15);
+            --border-color: #334155;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* ==========================================
+           RESET & BASE
+           ========================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 85px;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        /* Heurística #1: Visibilidad del Estado del Sistema (Barra de progreso de lectura) */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            width: 0%;
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
+
+        /* Contenedor Principal */
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ==========================================
+           NAVEGACIÓN (Heurísticas #3, #4, #6)
+           ========================================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 72px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] .navbar {
+            background: rgba(15, 23, 42, 0.85);
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 800;
+            font-size: 1.15rem;
+            letter-spacing: -0.02em;
+        }
+
+        .brand-badge {
+            background: var(--accent-primary);
+            color: #fff;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.5rem 0.9rem;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent-primary);
+            background: var(--accent-light);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .icon-btn {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .icon-btn:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            transform: translateY(-1px);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+        }
+
+        /* ==========================================
+           HERO SECTION (Equilibrio Visual & Claridad)
+           ========================================== */
+        .hero {
+            padding: 130px 0 70px;
+            position: relative;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.35fr 0.85fr;
+            gap: 3.5rem;
+            align-items: center;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent-light);
+            color: var(--accent-primary);
+            padding: 0.4rem 0.9rem;
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            border: 1px solid rgba(37, 99, 235, 0.2);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--success);
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.75; }
+        }
+
+        .hero-title {
+            font-size: clamp(2.25rem, 4vw, 3.25rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-subtitle span.divider {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .hero-description {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 620px;
+        }
+
+        /* Botones Consistentes (Heurística #4) */
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.85rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.75rem 1.35rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid transparent;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--accent-primary);
+            color: #FFFFFF;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border-color: var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+
+        /* Tarjeta de Contacto Rápido en Hero (Heurística #6: Reconocer antes que recordar) */
+        .quick-contact-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .quick-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            background: var(--bg-secondary);
+            padding: 0.45rem 0.85rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .quick-item:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        /* Contenedor de Foto Profesional */
+        .hero-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .photo-card {
+            position: relative;
+            width: 300px;
+            height: 340px;
+            border-radius: 20px;
+            background: linear-gradient(145deg, var(--accent-primary), #1E3A8A);
+            padding: 6px;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+
+        .photo-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .photo-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            background: var(--bg-secondary);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+
+        .photo-upload-overlay {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(15, 23, 42, 0.78);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 0.4rem 0.7rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+            opacity: 0.85;
+            transition: var(--transition);
+        }
+
+        .photo-upload-overlay:hover {
+            opacity: 1;
+            background: var(--accent-primary);
+        }
+
+        /* ==========================================
+           SECCIONES GENERALES
+           ========================================== */
+        section {
+            padding: 4.5rem 0;
+        }
+
+        .section-header {
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent-primary);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.35rem;
+        }
+
+        .section-title {
+            font-size: 1.85rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        /* ==========================================
+           RESUMEN DE IMPACTO (KPIs del CV)
+           ========================================== */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.35rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--accent-light);
+            color: var(--accent-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .stat-number {
+            font-size: 1.4rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* ==========================================
+           CONOCIMIENTOS TÉCNICOS & COMPETENCIAS
+           ========================================== */
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.45rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--accent-primary);
+            color: #fff;
+            border-color: var(--accent-primary);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .skill-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .skill-card:hover {
+            border-color: var(--accent-primary);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+        }
+
+        .skill-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.85rem;
+        }
+
+        .skill-title-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .skill-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--accent-light);
+            color: var(--accent-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .skill-name {
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+
+        .skill-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.65rem;
+            border-radius: 999px;
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+        }
+
+        .skill-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 7px;
+            background: var(--bg-tertiary);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 999px;
+            transition: width 0.8s ease;
+        }
+
+        /* ==========================================
+           EXPERIENCIA Y FORMACIÓN ACADÉMICA (Timeline)
+           ========================================== */
+        .dual-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 2rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 1.75rem;
+            border-left: 2px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .timeline-item:hover {
+            border-color: var(--accent-primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -2.35rem;
+            top: 1.5rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            border: 3px solid var(--bg-primary);
+            box-shadow: 0 0 0 2px var(--accent-primary);
+        }
+
+        .timeline-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-org {
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent-primary);
+        }
+
+        .timeline-duration {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: var(--accent-light);
+            color: var(--accent-primary);
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+        }
+
+        .timeline-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .timeline-desc {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+        }
+
+        /* Tarjetas de Educación e Idiomas */
+        .side-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.6rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .info-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .lang-item {
+            margin-bottom: 1.15rem;
+        }
+
+        .lang-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .lang-top {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            font-size: 0.92rem;
+            margin-bottom: 0.4rem;
+        }
+
+        /* ==========================================
+           SECCIÓN DE CONTACTO (Heurísticas #5 y #9)
+           ========================================== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.15fr;
+            gap: 2rem;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            transition: var(--transition);
+        }
+
+        .contact-card:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .contact-card-left {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+        }
+
+        .contact-label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .contact-value {
+            font-weight: 700;
+            font-size: 0.98rem;
+            word-break: break-all;
+        }
+
+        /* Formulario con Prevención y Diagnóstico de Errores */
+        .form-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.75rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .form-group {
+            margin-bottom: 1.15rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .form-input.error, .form-textarea.error {
+            border-color: var(--danger);
+        }
+
+        .error-msg {
+            color: var(--danger);
+            font-size: 0.8rem;
+            margin-top: 0.35rem;
+            display: none;
+        }
+
+        /* ==========================================
+           TOAST & MODAL DE AYUDA (Heurísticas #1 y #10)
+           ========================================== */
+        #toast-container {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .toast {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            padding: 0.85rem 1.25rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            box-shadow: var(--shadow-lg);
+            animation: slideIn 0.25s ease forwards;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Botón Flotante de Ayuda (Heurística #10) */
+        .help-fab {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            z-index: 990;
+            transition: var(--transition);
+        }
+
+        .help-fab:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            transform: scale(1.06);
+        }
+
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 1rem;
+        }
+
+        .modal-backdrop.open {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            max-width: 520px;
+            width: 100%;
+            padding: 1.75rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .kbd {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            font-weight: 600;
+        }
+
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 2.25rem 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+        }
+
+        /* ==========================================
+           RESPONSIVE & IMPRESIÓN
+           ========================================== */
+        @media (max-width: 868px) {
+            .hero-grid, .dual-grid, .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-visual {
+                order: -1;
+            }
+            .photo-card {
+                width: 230px;
+                height: 265px;
+            }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: var(--bg-secondary);
+                flex-direction: column;
+                padding: 1rem;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .nav-links.mobile-open {
+                display: flex;
+            }
+            .mobile-menu-btn {
+                display: flex;
+            }
+        }
+
+        @media print {
+            .navbar, .help-fab, .btn-group, .filter-tabs, .form-card, .photo-upload-overlay {
+                display: none !important;
+            }
+            body {
+                background: #fff;
+                color: #000;
+            }
+            section {
+                padding: 1.5rem 0;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Heurística #1: Barra de visibilidad de progreso de lectura -->
+    <div id="scroll-progress" role="progressbar" aria-label="Progreso de lectura"></div>
+
+    <!-- Navegación Principal (Heurística #4 y #6) -->
+    <header class="navbar">
+        <div class="container nav-content">
+            <a href="#inicio" class="brand" aria-label="Ir al inicio">
+                <span class="brand-badge">AM</span>
+                <span>Alvaro Montalvan</span>
+            </a>
+
+            <nav aria-label="Navegación principal">
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#inicio" class="nav-link active">Perfil</a></li>
+                    <li><a href="#habilidades" class="nav-link">Habilidades</a></li>
+                    <li><a href="#trayectoria" class="nav-link">Experiencia y Educación</a></li>
+                    <li><a href="#contacto" class="nav-link">Contacto</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="icon-btn" id="theme-toggle" title="Cambiar modo claro/oscuro (Atajo: T)" aria-label="Cambiar tema de color">
+                    <i data-lucide="moon" id="theme-icon"></i>
+                </button>
+                <button class="icon-btn" onclick="window.print()" title="Imprimir o guardar como PDF (Atajo: P)" aria-label="Imprimir portafolio">
+                    <i data-lucide="printer"></i>
+                </button>
+                <button class="icon-btn mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ==========================================
+             SECCIÓN HERO / PERFIL PROFESIONAL
+             ========================================== -->
+        <section id="inicio" class="hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div>
+                        <div class="status-pill">
+                            <span class="status-dot"></span>
+                            Disponible para prácticas preprofesionales y proyectos
+                        </div>
+
+                        <h1 class="hero-title">Alvaro Montalvan</h1>
+                        
+                        <div class="hero-subtitle">
+                            <span>Ingeniería de Software</span>
+                            <span class="divider">•</span>
+                            <span>Escuela Politécnica Nacional</span>
+                        </div>
+
+                        <p class="hero-description">
+                            Soy estudiante de <strong>sexto semestre de Ingeniería en Software</strong> de la Escuela Politécnica Nacional, con pasión por la tecnología y la innovación. Destaco por mi capacidad analítica, aprendizaje continuo y enfoque en la generación de soluciones eficientes. Aspiro a integrarme a una organización donde pueda aportar valor desde el primer día, asumir nuevos desafíos y desarrollar una carrera profesional.
+                        </p>
+
+                        <div class="btn-group">
+                            <a href="#contacto" class="btn btn-primary">
+                                <i data-lucide="send" style="width:18px;height:18px;"></i>
+                                Contactar ahora
+                            </a>
+                            <button class="btn btn-secondary" onclick="copyToClipboard('alvaro_uio27@gmail.com', 'Correo copiado al portapapeles')">
+                                <i data-lucide="copy" style="width:18px;height:18px;"></i>
+                                Copiar correo
+                            </button>
+                            <a href="https://wa.me/593995660712" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                                <i data-lucide="message-circle" style="width:18px;height:18px;"></i>
+                                WhatsApp
+                            </a>
+                        </div>
+
+                        <!-- Heurística #6: Reconocer información clave de un vistazo -->
+                        <div class="quick-contact-bar">
+                            <div class="quick-item" onclick="copyToClipboard('+593 995660712', 'Número de celular copiado')" title="Clic para copiar teléfono">
+                                <i data-lucide="phone" style="width:16px;height:16px;color:var(--accent-primary);"></i>
+                                <span>+593 995660712</span>
+                            </div>
+                            <div class="quick-item" onclick="copyToClipboard('alvaro_uio27@gmail.com', 'Correo electrónico copiado')" title="Clic para copiar correo">
+                                <i data-lucide="mail" style="width:16px;height:16px;color:var(--accent-primary);"></i>
+                                <span>alvaro_uio27@gmail.com</span>
+                            </div>
+                            <div class="quick-item" title="Ubicación actual">
+                                <i data-lucide="map-pin" style="width:16px;height:16px;color:var(--accent-primary);"></i>
+                                <span>La Mariscal, Quito - Ecuador</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Foto de Perfil con Fallback Inteligente -->
+                    <div class="hero-visual">
+                        <div class="photo-card">
+                            <div class="photo-inner">
+                                <img id="profile-img" 
+                                     src="foto-alvaro.jpg" 
+                                     alt="Retrato profesional de Alvaro Montalvan"
+                                     onerror="this.onerror=null; this.src='aa6ed4e7-6342-4cf9-9c44-9b54702d9e30.jpg'; this.addEventListener('error', function(){ this.src='https://ui-avatars.com/api/?name=Alvaro+Montalvan&background=1E3A8A&color=fff&size=512&font-size=0.33&bold=true'; });">
+                                
+                                <label for="upload-photo" class="photo-upload-overlay" title="Si la imagen no carga por ruta local, selecciónala aquí">
+                                    <i data-lucide="camera" style="width:14px;height:14px;"></i>
+                                    <span>Cambiar foto</span>
+                                </label>
+                                <input type="file" id="upload-photo" accept="image/*" style="display:none;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Indicadores Rápidos -->
+                <div class="stats-bar" style="margin-top: 3.5rem;">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i data-lucide="graduation-cap"></i></div>
+                        <div>
+                            <div class="stat-number">6.º Semestre</div>
+                            <div class="stat-label">Ingeniería de Software (EPN)</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i data-lucide="users"></i></div>
+                        <div>
+                            <div class="stat-number">96 Horas</div>
+                            <div class="stat-label">Tutor de Inclusión Digital</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i data-lucide="brain-circuit"></i></div>
+                        <div>
+                            <div class="stat-number">50 Horas</div>
+                            <div class="stat-label">Capacitación en IA (JISIC)</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i data-lucide="check-circle-2"></i></div>
+                        <div>
+                            <div class="stat-number">Scrum & Git</div>
+                            <div class="stat-label">Flujo de trabajo colaborativo</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             CONOCIMIENTOS TÉCNICOS Y COMPETENCIAS
+             ========================================== -->
+        <section id="habilidades">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <span class="section-tag">01 / Capacidades</span>
+                        <h2 class="section-title">Conocimientos Técnicos y Competencias</h2>
+                    </div>
+
+                    <!-- Heurística #3: Control y filtrado claro -->
+                    <div class="filter-tabs" role="tablist" aria-label="Filtrar habilidades">
+                        <button class="filter-btn active" data-filter="all">Todas (9)</button>
+                        <button class="filter-btn" data-filter="tech">Conocimientos Técnicos (5)</button>
+                        <button class="filter-btn" data-filter="soft">Competencias (4)</button>
+                    </div>
+                </div>
+
+                <div class="skills-grid" id="skills-grid">
+                    <!-- Técnicos -->
+                    <article class="skill-card" data-category="tech">
+                        <div>
+                            <div class="skill-top">
+                                <div class="skill-title-group">
+                                    <div class="skill-icon"><i data-lucide="git-branch"></i></div>
+                                    <h3 class="skill-name">Git y GitHub</h3>
+                                </div>
+                                <span class="skill-badge">Técnico</span>
+                            </div>
+                            <p class="skill-desc">Control de versiones, gestión de repositorios remotos, ramas y trabajo colaborativo en proyectos de software.</p>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 85%;"></div></div>
+                    </article>
+
+                    <article class="skill-card" data-category="tech">
+                        <div>
+                            <div class="skill-top">
+                                <div class="skill-title-group">
+                                    <div class="skill-icon"><i data-lucide="code-2"></i></div>
+                                    <h3 class="skill-name">HTML y CSS</h3>
+                                </div>
+                                <span class="skill-badge">Técnico</span>
+                            </div>
+                            <p class="skill-desc">Estructuración semántica web, maquetación responsiva moderna y diseño centrado en la usabilidad.</p>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 85%;"></div></div>
+                    </article>
+
+                    <article class="skill-card" data-category="tech">
+                        <div>
+                            <div class="skill-top">
+                                <div class="skill-title-group">
+                                    <div class="skill-icon"><i data-lucide="kanban"></i></div>
+                                    <h3 class="skill-name">Metodologías Ágiles (Scrum)</h3>
+                                </div>
+                                <span class="skill-badge">Técnico</span>
+                            </div>
+                            <p class="skill-desc">Familiaridad con marcos de trabajo iterativos, ceremonias Scrum, gestión de entregas y adaptación al cambio.</p>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 80%;"></div></div>
+                    </article>
+
+                    <article class="skill-card" data-category="tech">
+                        <div>
+                            <div class="skill-top">
+                                <div class="skill-title-group">
+                                    <div class="skill-icon"><i data-lucide="database"></i></div>
+                                    <h3 class="skill-name">Bases de Datos</h3>
+                                </div>
+                                <span class="skill-badge">Nivel Básico</span>
+                            </div>
+                            <p class="skill-desc">Fundamentos de modelado relacional, consultas estructuradas y organización lógica de la información.</p>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 65%;"></div></div>
+                    </article>
+
+                    <article class="skill-card" data-category="tech">
+                        <div>
+                            <div class="skill-top">
+                                <div class="skill-title-group">
+                                    <div class="skill-icon"><i data-lucide="file-spreadsheet"></i></div>
+                                    <h3 class="skill-name">Microsoft Office</h3>
+                                </div>
+                                <span class="skill-badge">Técnico</span>
+                            </div>
+                            <p class="skill-desc">Manejo de herramientas ofimáticas para documentación técnica, análisis de datos y presentaciones ejecutivas.</p>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 90%;"></div></div>
+                    </article>
+
+                    <!-- Competencias Blandas -->
+                    <article class="skill-card" data-category="soft">
+                        <div>
+                            <div class="skill-top">
+                                <div class="skill-title-group">
+                                    <div class="skill-icon"><i data-lucide="lightbulb"></i></div>
+                                    <h3 class="skill-name">Pensamiento Analítico</h3>
+                                </div>
+                                <span class="skill-badge">Competencia</span>
+                            </div>
+                            <p class="skill-desc">Capacidad para descomponer problemas complejos e identificar soluciones lógicas y eficientes.</p>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 95%;"></div></div>
+                    </article>
+
+                    <article class="skill-card" data-category="soft">
+                        <div>
+                            <div class="skill-top">
+                                <div class="skill-title-group">
+                                    <div class="skill-icon"><i data-lucide="book-open-check"></i></div>
+                                    <h3 class="skill-name">Aprendizaje Continuo</h3>
+                                </div>
+                                <span class="skill-badge">Competencia</span>
+                            </div>
+                            <p class="skill-desc">Rápida asimilación de nuevas tecnologías, lenguajes y metodologías según las demandas del proyecto.</p>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 95%;"></div></div>
+                    </article>
+
+                    <article class="skill-card" data-category="soft">
+                        <div>
+                            <div class="skill-top">
+                                <div class="skill-title-group">
+                                    <div class="skill-icon"><i data-lucide="shield-check"></i></div>
+                                    <h3 class="skill-name">Orden y Disciplina</h3>
+                                </div>
+                                <span class="skill-badge">Competencia</span>
+                            </div>
+                            <p class="skill-desc">Organización rigurosa del tiempo, cumplimiento de plazos y atención a los estándares de calidad.</p>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 92%;"></div></div>
+                    </article>
+
+                    <article class="skill-card" data-category="soft">
+                        <div>
+                            <div class="skill-top">
+                                <div class="skill-title-group">
+                                    <div class="skill-icon"><i data-lucide="Handshake"></i></div>
+                                    <h3 class="skill-name">Trabajo en Equipo</h3>
+                                </div>
+                                <span class="skill-badge">Competencia</span>
+                            </div>
+                            <p class="skill-desc">Comunicación asertiva, empatía y sinergia colaborativa para alcanzar objetivos comunes.</p>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 92%;"></div></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             EXPERIENCIA ACADÉMICA, FORMACIÓN E IDIOMAS
+             ========================================== -->
+        <section id="trayectoria">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <span class="section-tag">02 / Trayectoria</span>
+                        <h2 class="section-title">Experiencia Académica y Formación</h2>
+                    </div>
+                </div>
+
+                <div class="dual-grid">
+                    <!-- Columna Izquierda: Experiencia Académica -->
+                    <div>
+                        <h3 style="margin-bottom: 1.25rem; font-size: 1.15rem; display:flex; align-items:center; gap:0.5rem;">
+                            <i data-lucide="award" style="color:var(--accent-primary);"></i>
+                            Experiencia Académica
+                        </h3>
+
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <span class="timeline-dot"></span>
+                                <div class="timeline-meta">
+                                    <span class="timeline-org">Escuela Politécnica Nacional</span>
+                                    <span class="timeline-duration">
+                                        <i data-lucide="clock" style="width:14px;height:14px;"></i>
+                                        Duración: 96 horas
+                                    </span>
+                                </div>
+                                <h4 class="timeline-title">Tutor del Proyecto de Inclusión Digital (23.ª edición)</h4>
+                                <p class="timeline-desc">
+                                    Planificación y ejecución de actividades de inclusión y alfabetización digital orientadas a la comunidad, fortaleciendo habilidades pedagógicas, comunicación efectiva y servicio social.
+                                </p>
+                            </div>
+
+                            <div class="timeline-item">
+                                <span class="timeline-dot"></span>
+                                <div class="timeline-meta">
+                                    <span class="timeline-org">XII Jornadas JISIC 2025 - EPN</span>
+                                    <span class="timeline-duration">
+                                        <i data-lucide="clock" style="width:14px;height:14px;"></i>
+                                        Duración: 50 horas
+                                    </span>
+                                </div>
+                                <h4 class="timeline-title">Capacitación «Fundamentos y Tendencias de la Inteligencia Artificial»</h4>
+                                <p class="timeline-desc">
+                                    Participación activa en las XII Jornadas de Ingeniería de Sistemas Informáticos y de Computación (JISIC 2025) en la Escuela Politécnica Nacional, profundizando en conceptos modernos y aplicaciones de IA.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Columna Derecha: Formación Académica e Idiomas -->
+                    <div class="side-stack">
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <div class="stat-icon"><i data-lucide="building-2"></i></div>
+                                <div>
+                                    <span class="section-tag" style="margin:0;">Educación Superior</span>
+                                    <h3 style="font-size: 1.15rem;">Formación Académica</h3>
+                                </div>
+                            </div>
+                            <h4 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem;">Ingeniería de Software</h4>
+                            <p style="color: var(--accent-primary); font-weight: 600; font-size: 0.92rem; margin-bottom: 0.6rem;">
+                                Escuela Politécnica Nacional (EPN)
+                            </p>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                                Estudiante activo de <strong>6.º Semestre</strong>. Formación sólida en construcción de software, análisis de sistemas, calidad y resolución algorítmica de problemas.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <div class="stat-icon"><i data-lucide="languages"></i></div>
+                                <div>
+                                    <span class="section-tag" style="margin:0;">Comunicación</span>
+                                    <h3 style="font-size: 1.15rem;">Idiomas</h3>
+                                </div>
+                            </div>
+
+                            <div class="lang-item">
+                                <div class="lang-top">
+                                    <span>Español</span>
+                                    <span style="color: var(--accent-primary);">Nativo (100%)</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="progress-fill" style="width: 100%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="lang-item">
+                                <div class="lang-top">
+                                    <span>Inglés (Hablado y escrito)</span>
+                                    <span style="color: var(--accent-primary);">40%</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="progress-fill" style="width: 40%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             CONTACTO DIRECTO (Heurísticas #5 y #9)
+             ========================================== -->
+        <section id="contacto">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <span class="section-tag">03 / Contacto</span>
+                        <h2 class="section-title">¿Conversamos sobre una oportunidad?</h2>
+                    </div>
+                </div>
+
+                <div class="contact-grid">
+                    <!-- Tarjetas de acción directa -->
+                    <div class="contact-methods">
+                        <div class="contact-card">
+                            <div class="contact-card-left">
+                                <div class="stat-icon"><i data-lucide="mail"></i></div>
+                                <div>
+                                    <div class="contact-label">Correo Electrónico</div>
+                                    <div class="contact-value">alvaro_uio27@gmail.com</div>
+                                </div>
+                            </div>
+                            <button class="icon-btn" onclick="copyToClipboard('alvaro_uio27@gmail.com', 'Correo copiado')" title="Copiar correo">
+                                <i data-lucide="copy" style="width:18px;height:18px;"></i>
+                            </button>
+                        </div>
+
+                        <div class="contact-card">
+                            <div class="contact-card-left">
+                                <div class="stat-icon"><i data-lucide="phone"></i></div>
+                                <div>
+                                    <div class="contact-label">Celular / WhatsApp</div>
+                                    <div class="contact-value">+593 995660712</div>
+                                </div>
+                            </div>
+                            <button class="icon-btn" onclick="copyToClipboard('+593 995660712', 'Teléfono copiado')" title="Copiar número">
+                                <i data-lucide="copy" style="width:18px;height:18px;"></i>
+                            </button>
+                        </div>
+
+                        <div class="contact-card">
+                            <div class="contact-card-left">
+                                <div class="stat-icon"><i data-lucide="map-pin"></i></div>
+                                <div>
+                                    <div class="contact-label">Dirección</div>
+                                    <div class="contact-value">La Mariscal, Quito - Ecuador</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formulario con validación asistida -->
+                    <div class="form-card">
+                        <h3 style="margin-bottom: 1rem; font-size: 1.15rem;">Envíame un mensaje directo</h3>
+                        <form id="contact-form" novalidate>
+                            <div class="form-group">
+                                <label class="form-label" for="name">Nombre o Empresa *</label>
+                                <input class="form-input" type="text" id="name" placeholder="Ej. Reclutamiento Tech" required>
+                                <div class="error-msg" id="err-name">Por favor, ingresa tu nombre o el de tu organización.</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="email">Correo de contacto *</label>
+                                <input class="form-input" type="email" id="email" placeholder="ejemplo@empresa.com" required>
+                                <div class="error-msg" id="err-email">Ingresa un correo electrónico válido (ej. nombre@dominio.com).</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="message">Mensaje *</label>
+                                <textarea class="form-textarea" id="message" rows="3" placeholder="Hola Alvaro, nos gustaría conversar contigo sobre..." required></textarea>
+                                <div class="error-msg" id="err-message">Por favor, escribe un breve mensaje antes de enviar.</div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">
+                                <i data-lucide="send" style="width:18px;height:18px;"></i>
+                                Preparar correo de contacto
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 <strong>Alvaro Montalvan</strong> • Ingeniería de Software - Escuela Politécnica Nacional • Quito, Ecuador</p>
+        </div>
+    </footer>
+
+    <!-- Heurística #1: Contenedor de Notificaciones de Estado -->
+    <div id="toast-container" aria-live="polite"></div>
+
+    <!-- Heurística #10: Botón y Modal de Ayuda / Atajos -->
+    <button class="help-fab" id="help-btn" title="Ayuda y atajos de teclado (?)" aria-label="Abrir guía de ayuda">
+        <i data-lucide="help-circle"></i>
+    </button>
+
+    <div class="modal-backdrop" id="help-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-content">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem;">
+                <h3 id="modal-title" style="font-size: 1.2rem;">Guía Rápida y Atajos de Teclado</h3>
+                <button class="icon-btn" id="close-modal" aria-label="Cerrar ventana">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:0.75rem; font-size:0.9rem;">
+                <div style="display:flex; justify-content:space-between;">
+                    <span>Copiar correo electrónico al instante</span>
+                    <span class="kbd">Tecla C</span>
+                </div>
+                <div style="display:flex; justify-content:space-between;">
+                    <span>Alternar modo Claro / Oscuro</span>
+                    <span class="kbd">Tecla T</span>
+                </div>
+                <div style="display:flex; justify-content:space-between;">
+                    <span>Imprimir o Guardar CV en PDF</span>
+                    <span class="kbd">Tecla P</span>
+                </div>
+                <div style="display:flex; justify-content:space-between;">
+                    <span>Abrir / Cerrar esta ventana de ayuda</span>
+                    <span class="kbd">? o ESC</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         LÓGICA INTERACTIVA
+         ========================================== -->
+    <script>
+        // Inicializar iconos Lucide
+        lucide.createIcons();
+
+        // 1. Barra de progreso de lectura y ScrollSpy (Heurística #1)
+        const progressBar = document.getElementById('scroll-progress');
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (scrollTop / docHeight) * 100;
+            progressBar.style.width = `${progress}%`;
+
+            let currentSection = '';
+            sections.forEach(sec => {
+                const sectionTop = sec.offsetTop - 130;
+                if (scrollTop >= sectionTop) {
+                    currentSection = sec.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // 2. Sistema de Notificaciones Toast (Heurística #1)
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<i data-lucide="check-circle" style="width:18px;height:18px;color:#10B981;"></i> <span>${message}</span>`;
+            container.appendChild(toast);
+            lucide.createIcons();
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(10px)';
+                toast.style.transition = 'all 0.25s ease';
+                setTimeout(() => toast.remove(), 250);
+            }, 2800);
+        }
+
+        // 3. Copiar al portapapeles (Heurística #5: Prevención de errores)
+        function copyToClipboard(text, msg) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(msg);
+            });
+        }
+
+        // 4. Modo Claro / Oscuro con persistencia (Heurística #3)
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlEl = document.documentElement;
+
+        function toggleTheme() {
+            const isDark = htmlEl.getAttribute('data-theme') === 'dark';
+            const nextTheme = isDark ? 'light' : 'dark';
+            htmlEl.setAttribute('data-theme', nextTheme);
+            localStorage.setItem('alvaro-theme', nextTheme);
+            themeToggle.innerHTML = `<i data-lucide="${nextTheme === 'dark' ? 'sun' : 'moon'}"></i>`;
+            lucide.createIcons();
+            showToast(nextTheme === 'dark' ? 'Modo oscuro activado' : 'Modo claro activado');
+        }
+
+        themeToggle.addEventListener('click', toggleTheme);
+
+        if (localStorage.getItem('alvaro-theme') === 'dark') {
+            htmlEl.setAttribute('data-theme', 'dark');
+            themeToggle.innerHTML = `<i data-lucide="sun"></i>`;
+            lucide.createIcons();
+        }
+
+        // 5. Filtro interactivo de Habilidades (Heurística #3)
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const skillCards = document.querySelectorAll('.skill-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.getAttribute('data-filter');
+
+                skillCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // 6. Carga manual de foto en caso de abrir el archivo sin servidor local
+        const uploadInput = document.getElementById('upload-photo');
+        const profileImg = document.getElementById('profile-img');
+
+        uploadInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    profileImg.src = evt.target.result;
+                    showToast('Fotografía actualizada correctamente');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // 7. Validación de Formulario (Heurística #9: Ayuda para diagnosticar errores)
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            const message = document.getElementById('message');
+
+            let valid = true;
+
+            if (!name.value.trim()) {
+                name.classList.add('error');
+                document.getElementById('err-name').style.display = 'block';
+                valid = false;
+            } else {
+                name.classList.remove('error');
+                document.getElementById('err-name').style.display = 'none';
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.value.trim())) {
+                email.classList.add('error');
+                document.getElementById('err-email').style.display = 'block';
+                valid = false;
+            } else {
+                email.classList.remove('error');
+                document.getElementById('err-email').style.display = 'none';
+            }
+
+            if (!message.value.trim()) {
+                message.classList.add('error');
+                document.getElementById('err-message').style.display = 'block';
+                valid = false;
+            } else {
+                message.classList.remove('error');
+                document.getElementById('err-message').style.display = 'none';
+            }
+
+            if (valid) {
+                const subject = encodeURIComponent(`Contacto Portafolio Web - ${name.value.trim()}`);
+                const body = encodeURIComponent(`${message.value.trim()}\n\n---\nEnviado por: ${name.value.trim()} (${email.value.trim()})`);
+                window.location.href = `mailto:alvaro_uio27@gmail.com?subject=${subject}&body=${body}`;
+                showToast('Abriendo cliente de correo...');
+                contactForm.reset();
+            }
+        });
+
+        // 8. Menú móvil y Modal de Ayuda (Heurística #7 y #10)
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const navLinksContainer = document.getElementById('nav-links');
+        mobileBtn.addEventListener('click', () => {
+            navLinksContainer.classList.toggle('mobile-open');
+        });
+
+        const helpBtn = document.getElementById('help-btn');
+        const helpModal = document.getElementById('help-modal');
+        const closeModal = document.getElementById('close-modal');
+
+        helpBtn.addEventListener('click', () => helpModal.classList.add('open'));
+        closeModal.addEventListener('click', () => helpModal.classList.remove('open'));
+        helpModal.addEventListener('click', (e) => {
+            if (e.target === helpModal) helpModal.classList.remove('open');
+        });
+
+        // Atajos de teclado (Heurística #7: Flexibilidad y eficiencia de uso)
+        window.addEventListener('keydown', (e) => {
+            if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+            if (e.key.toLowerCase() === 'c') {
+                copyToClipboard('alvaro_uio27@gmail.com', 'Correo copiado (Atajo C)');
+            } else if (e.key.toLowerCase() === 't') {
+                toggleTheme();
+            } else if (e.key.toLowerCase() === 'p') {
+                e.preventDefault();
+                window.print();
+            } else if (e.key === '?' || e.key === '/') {
+                helpModal.classList.toggle('open');
+            } else if (e.key === 'Escape') {
+                helpModal.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html>
